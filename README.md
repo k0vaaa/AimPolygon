@@ -1,2 +1,2 @@
-# MovementTester
-Repo for Unity project
+# AimPolygon
+Repo for simple 3D shooter Unity project
