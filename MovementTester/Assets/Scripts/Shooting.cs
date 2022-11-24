@@ -8,12 +8,16 @@ public class Shooting : MonoBehaviour
     public float range = 100f;
     public Camera cam;
     public ParticleSystem particle;
-   
+    public Animator _animator;
     void Update()
     {   
         if (Input.GetButtonDown("Fire1")){
+            _animator.SetBool("CurrentShoot",true);
             Shoot();
 
+        }
+        else {
+            _animator.SetBool("CurrentShoot",false);
         }
     }
     void Shoot()
@@ -29,12 +33,7 @@ public class Shooting : MonoBehaviour
             if (target != null)
             {
                 target.TakeDamage(damage);
-            //     if(hit.transform.name =="EnemyBody"){
-            //         target.TakeDamage(damage);
-            // }
-            //     if(hit.transform.name =="EnemyHead"){
-            //         target.TakeDamage(damage*2);
-            // }
+            
 
             }
         }

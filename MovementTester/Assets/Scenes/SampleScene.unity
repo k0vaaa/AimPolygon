@@ -1229,7 +1229,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &963194227
 Camera:
   m_ObjectHideFlags: 0
@@ -6185,6 +6185,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1006591018}
   - component: {fileID: 1006591019}
+  - component: {fileID: 1006591020}
   m_Layer: 6
   m_Name: Gun
   m_TagString: Untagged
@@ -6199,8 +6200,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1006591017}
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: 0.26100007, y: 0.12400007, z: 0.80900025}
+  m_LocalRotation: {x: 0.011230754, y: 0.7070176, z: -0.011230754, w: -0.7070176}
+  m_LocalPosition: {x: 0.4980002, y: -0.055999994, z: 0.9420005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6220,10 +6221,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f40dd093212dbbc468006352237e8a30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 50
   range: 100
   cam: {fileID: 963194227}
   particle: {fileID: 983396054}
+  _animator: {fileID: 1006591020}
+--- !u!95 &1006591020
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006591017}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e120b7fe28823994fba0d96e66da3565, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1045952764
 GameObject:
   m_ObjectHideFlags: 0
@@ -7240,7 +7262,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1779634349}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.015882686, w: 0.99987394}
   m_LocalPosition: {x: 0.133, y: -0.18, z: -0.237}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -7251,7 +7273,7 @@ Transform:
   - {fileID: 983396052}
   m_Father: {fileID: 1006591018}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 1.82}
 --- !u!1 &1807345489
 GameObject:
   m_ObjectHideFlags: 0
