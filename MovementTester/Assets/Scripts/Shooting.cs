@@ -13,31 +13,63 @@ public class Shooting : MonoBehaviour
     public Animator _animator;
     public bool fireready;
     private int startammo;
-
+    public TMPro.TextMeshProUGUI ammotext;
+    public TMPro.TextMeshProUGUI reloadalert;
+    public Animator _noBulletsAnim;
+    
     void Start()
     {
-        fireready = true;
         startammo = ammo;
+        ammotext.text = startammo.ToString();
+        fireready = true;
     }
     
     void Update()
     {   
         if (Input.GetButtonDown("Fire1") && fireready){
-            _animator.SetBool("CurrentShoot",true);
-            Shoot();
+            
+            
+            if(ammo==0){
+            _noBulletsAnim.SetBool("NoBullets",true);
+            reloadalert.text = "Нажмите 'R' для перезарядки";
+            fireready = false; 
+            
+            }
+
+            else{
+                Shoot();
+                ammo--;
+                ammotext.text = ammo.ToString();
+            }  
 
         }
         else {
             _animator.SetBool("CurrentShoot",false);
+            
         }
 
-        if (Input.GetKey(KeyCode.R)){
-            Reload();
-        }
+        // if (Input.GetKey(KeyCode.R)){
+        //     _animator.SetBool("Reloading",true);
+        //     // _animator.SetBool("check",true);
+        //     Reload();
+
+        // }
+        
     }
+    void FixedUpdate(){
+        if (Input.GetKey(KeyCode.R)){
+                    _animator.SetBool("Reloading",true);
+                    // _animator.SetBool("check",true);
+                    Reload();
+
+                }
+    }
+
     void Shoot()
     {   
+        _animator.SetBool("CurrentShoot",true);
         particle.Play();
+
         RaycastHit hit;
 
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range)){
@@ -49,16 +81,22 @@ public class Shooting : MonoBehaviour
             if (target != null)
             {
                 target.TakeDamage(damage);
-            
-
             }
         }
+
+        
     }
+
     public void Reload()
-    {
+    {   
+        // _animator.SetTrigger("Reloading");
         ammo = startammo;
+        _noBulletsAnim.SetBool("NoBullets",false);
+        reloadalert.text = "";
         fireready = true;
-        gameObject.GetComponent<UIScript>().textMy.text = ammo.ToString();
+        ammotext.text = ammo.ToString();
+        _animator.SetBool("Reloading",false);
+        
     }
     
 }
