@@ -47,21 +47,15 @@ public class Shooting : MonoBehaviour
             _animator.SetBool("CurrentShoot",false);
             
         }
-
-        // if (Input.GetKey(KeyCode.R)){
-        //     _animator.SetBool("Reloading",true);
-        //     // _animator.SetBool("check",true);
-        //     Reload();
-
-        // }
+        if (Input.GetKey(KeyCode.R) && ammo<7){
+            _animator.SetBool("Reloading",true);
+            Reload();
+        }
         
     }
     void FixedUpdate(){
         if (Input.GetKey(KeyCode.R)){
-                    _animator.SetBool("Reloading",true);
-                    // _animator.SetBool("check",true);
                     Reload();
-
                 }
     }
 
@@ -89,14 +83,19 @@ public class Shooting : MonoBehaviour
 
     public void Reload()
     {   
-        // _animator.SetTrigger("Reloading");
+        fireready = false;
+        _animator.SetBool("Reloading",true);
+        reloadalert.text = "";
+    }
+
+    public void CancelAnimation(){
         ammo = startammo;
         _noBulletsAnim.SetBool("NoBullets",false);
-        reloadalert.text = "";
-        fireready = true;
         ammotext.text = ammo.ToString();
         _animator.SetBool("Reloading",false);
-        
-    }
+        fireready = true;
+    }    
+    
+
     
 }
