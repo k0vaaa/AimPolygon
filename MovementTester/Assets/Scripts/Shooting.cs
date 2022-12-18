@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Shooting : MonoBehaviour
 {
+    public ParticleSystem Sparks;
+    public GameObject spark;
     public float damage = 10f;
     public float range = 100f;
     public int ammo;
@@ -16,7 +18,7 @@ public class Shooting : MonoBehaviour
     public TMPro.TextMeshProUGUI ammotext;
     public TMPro.TextMeshProUGUI reloadalert;
     public Animator _noBulletsAnim;
-    
+    private RaycastHit hit;
     void Start()
     {
         startammo = ammo;
@@ -47,24 +49,19 @@ public class Shooting : MonoBehaviour
             _animator.SetBool("CurrentShoot",false);
             
         }
-        if (Input.GetKey(KeyCode.R) && ammo<7){
+        if (Input.GetKey(KeyCode.R)){
             _animator.SetBool("Reloading",true);
             Reload();
         }
         
     }
-    void FixedUpdate(){
-        if (Input.GetKey(KeyCode.R)){
-                    Reload();
-                }
-    }
-
+    
     void Shoot()
     {   
         _animator.SetBool("CurrentShoot",true);
         particle.Play();
 
-        RaycastHit hit;
+        
 
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range)){
             // Debug.DrawRay(cam.transform.position, cam.transform.forward*100f, Color.red,1,false);
@@ -75,10 +72,15 @@ public class Shooting : MonoBehaviour
             if (target != null)
             {
                 target.TakeDamage(damage);
+                
+                spark.transform.position = hit.point;
+                spark.transform.rotation = Quaternion.LookRotation(hit.normal);
+
+                Sparks.Play();
             }
         }
 
-        
+
     }
 
     public void Reload()
@@ -95,7 +97,5 @@ public class Shooting : MonoBehaviour
         _animator.SetBool("Reloading",false);
         fireready = true;
     }    
-    
 
-    
 }
