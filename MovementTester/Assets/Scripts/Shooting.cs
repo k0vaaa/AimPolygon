@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Shooting : MonoBehaviour
+public class Shooting: MonoBehaviour
 {
     public ParticleSystem Sparks;
     public GameObject spark;
@@ -19,6 +19,7 @@ public class Shooting : MonoBehaviour
     public TMPro.TextMeshProUGUI reloadalert;
     public Animator _noBulletsAnim;
     private RaycastHit hit;
+   
     void Start()
     {
         startammo = ammo;
@@ -49,9 +50,11 @@ public class Shooting : MonoBehaviour
             _animator.SetBool("CurrentShoot",false);
             
         }
-        if (Input.GetKey(KeyCode.R)){
+        if ((Input.GetKey(KeyCode.R) && fireready == true)  || (Input.GetKey(KeyCode.R) && ammo == 0)){
             _animator.SetBool("Reloading",true);
+            fireready = false;
             Reload();
+
         }
         
     }
@@ -88,6 +91,7 @@ public class Shooting : MonoBehaviour
         fireready = false;
         _animator.SetBool("Reloading",true);
         reloadalert.text = "";
+        
     }
 
     public void CancelAnimation(){

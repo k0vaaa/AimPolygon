@@ -7,14 +7,9 @@ public class Target : MonoBehaviour
 {
     public float health = 50f;
     
-    public GameObject Eliminatelist;
 
     public Animator anims;
     
-
-    void Start(){
-        Eliminatelist.SetActive(false);
-    }
 
     public void TakeDamage(float amount)
     {
@@ -28,11 +23,7 @@ public class Target : MonoBehaviour
     void Destroy()
     {   
         Destroy(gameObject);
-        // Eliminatelist.SetActive(true);
         
     }
     
-    public void CancelAnimation(){ 
-        // Eliminatelist.SetActive(false);
-    }
 }
