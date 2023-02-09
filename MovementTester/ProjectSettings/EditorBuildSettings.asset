@@ -10,5 +10,8 @@ EditorBuildSettings:
     guid: 76599277273bd74478dd7cd2ebe2fddd
   - enabled: 1
     path: Assets/Scenes/Playground.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    guid: d12990608ed5b1e46a1f6b99912bb05e
+  - enabled: 1
+    path: Assets/Scenes/DotsLevel.unity
+    guid: a827dcfa2764945479d21e12b33e4243
   m_configObjects: {}

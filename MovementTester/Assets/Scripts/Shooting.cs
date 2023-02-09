@@ -5,8 +5,28 @@ using UnityEngine.UI;
 
 public class Shooting: MonoBehaviour
 {
-    public ParticleSystem Sparks;
-    public GameObject spark;
+    // public ParticleSystem Sparks;
+    // public GameObject spark;
+
+
+    [Header("Bullet impacts to metal objects")]
+    public ParticleSystem SparksMetal;
+    public GameObject spark_metal;
+    public float lifeTimeMetal = 5.0f;
+    private GameObject clonem;
+    private GameObject[] bulletimpact2;
+    
+    [Header("Bullet impacts to enemy flesh objects")]
+    public ParticleSystem SparksFlesh;
+    public GameObject spark_flesh;
+    private GameObject clonef;
+    // private GameObject[] bulletimpact1;
+    // public float lifeTimeFlesh = 5.0f;
+
+
+    // public ParticleSystem Sparks;
+    // public GameObject spark;
+
     public float damage = 10f;
     public float range = 100f;
     public int ammo;
@@ -18,8 +38,8 @@ public class Shooting: MonoBehaviour
     public TMPro.TextMeshProUGUI ammotext;
     public TMPro.TextMeshProUGUI reloadalert;
     public Animator _noBulletsAnim;
-    private RaycastHit hit;
-   
+    public RaycastHit hit;
+    
     void Start()
     {
         startammo = ammo;
@@ -34,7 +54,7 @@ public class Shooting: MonoBehaviour
             
             if(ammo==0){
             _noBulletsAnim.SetBool("NoBullets",true);
-            reloadalert.text = "Нажмите 'R' для перезарядки";
+            reloadalert.text = "Press <R> to reload";
             fireready = false; 
             
             }
@@ -56,6 +76,8 @@ public class Shooting: MonoBehaviour
             Reload();
 
         }
+
+        
         
     }
     
@@ -68,20 +90,47 @@ public class Shooting: MonoBehaviour
 
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range)){
             // Debug.DrawRay(cam.transform.position, cam.transform.forward*100f, Color.red,1,false);
-            Debug.Log(hit.transform.name);
             
+            DotSpawn.hitted= hit.transform.name;
             Target target = hit.transform.GetComponent<Target>();
+            Dot dot = hit.transform.GetComponent<Dot>();
             
             if (target != null)
             {
                 target.TakeDamage(damage);
-                
-                spark.transform.position = hit.point;
-                spark.transform.rotation = Quaternion.LookRotation(hit.normal);
+                // clonef = Instantiate(spark_flesh, hit.point, Quaternion.LookRotation(hit.normal)); 
+                // clonef.tag= "trashf";
+                spark_flesh.transform.position = hit.point;
+                spark_flesh.transform.rotation = Quaternion.LookRotation(hit.normal);
+                SparksFlesh.Play();
 
-                Sparks.Play();
+
+
+                // bulletimpact2 = GameObject.FindGameObjectsWithTag("trashf");
+                // foreach(GameObject i in bulletimpact2){
+                //     Destroy(i, lifeTimeFlesh);
+                // }
             }
-        }
+            else if(dot !=null)
+            {
+                dot.TakeDamage();
+                // spark_metal.transform.position = hit.point;
+                // spark_metal.transform.rotation = Quaternion.LookRotation(hit.normal);
+                SparksMetal.Play();
+                // Destroy(ddddddddddddddddddddddddspark_metal);
+            }
+
+            else {
+                clonem = Instantiate(spark_metal, hit.point, Quaternion.LookRotation(hit.normal)); 
+                clonem.tag= "trashm";
+                SparksMetal.Play();
+                bulletimpact2 = GameObject.FindGameObjectsWithTag("trashm");
+                foreach(GameObject i in bulletimpact2){
+                    Destroy(i, lifeTimeMetal);
+                }
+                
+            }
+        }   
 
 
     }

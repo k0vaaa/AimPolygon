@@ -8,7 +8,7 @@ public class Target : MonoBehaviour
     public float health = 50f;
     
 
-    public Animator anims;
+    // public Animator anims;
     
 
     public void TakeDamage(float amount)

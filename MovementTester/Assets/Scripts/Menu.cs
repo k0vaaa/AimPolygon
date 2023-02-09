@@ -5,13 +5,37 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    public void Play()
+    public GameObject modeselect;
+
+    public void Start(){
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        modeselect.SetActive(false);
+    }
+
+    public void ModeSelect()
     {
-        SceneManager.LoadScene(1);
+        modeselect.SetActive(true);
     }
 
     public void Exit()
     {
         Application.Quit();
     }
+
+    public void CloseSelection()
+    {
+        modeselect.SetActive(false);
+    }
+
+    public void Mode1Select()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void Mode2Select()
+    {
+        SceneManager.LoadScene(2);
+    }
+
 }
