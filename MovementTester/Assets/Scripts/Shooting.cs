@@ -8,6 +8,9 @@ public class Shooting: MonoBehaviour
     // public ParticleSystem Sparks;
     // public GameObject spark;
 
+    [Header("Bullet impacts to wooden objects")]
+    public ParticleSystem sparksWood;
+    public GameObject spark_wood;
 
     [Header("Bullet impacts to metal objects")]
     public ParticleSystem SparksMetal;
@@ -39,9 +42,11 @@ public class Shooting: MonoBehaviour
     public TMPro.TextMeshProUGUI reloadalert;
     public Animator _noBulletsAnim;
     public RaycastHit hit;
+    // public bool picked;
     
     void Start()
     {
+        // picked = false;
         startammo = ammo;
         ammotext.text = startammo.ToString();
         fireready = true;
@@ -49,6 +54,9 @@ public class Shooting: MonoBehaviour
     
     void Update()
     {   
+        // if(picked==false){
+        //     return;
+        // }
         if (Input.GetButtonDown("Fire1") && fireready){
             
             
@@ -59,7 +67,7 @@ public class Shooting: MonoBehaviour
             
             }
 
-            else{
+            else{           
                 Shoot();
                 ammo--;
                 ammotext.text = ammo.ToString();
@@ -70,12 +78,14 @@ public class Shooting: MonoBehaviour
             _animator.SetBool("CurrentShoot",false);
             
         }
-        if ((Input.GetKey(KeyCode.R) && fireready == true)  || (Input.GetKey(KeyCode.R) && ammo == 0)){
-            _animator.SetBool("Reloading",true);
-            fireready = false;
+        if ((Input.GetKeyDown(KeyCode.R) && fireready == true)  || (Input.GetKeyDown(KeyCode.R) && ammo == 0)){
             Reload();
 
+
         }
+        // if (Input.KeyUp(KeyCode.R)){
+        //     _animator.SetBool("Reloading",false);
+        // }
 
         
         
@@ -94,6 +104,7 @@ public class Shooting: MonoBehaviour
             DotSpawn.hitted= hit.transform.name;
             Target target = hit.transform.GetComponent<Target>();
             Dot dot = hit.transform.GetComponent<Dot>();
+            Wood box = hit.transform.GetComponent<Wood>();
             
             if (target != null)
             {
@@ -120,6 +131,12 @@ public class Shooting: MonoBehaviour
                 // Destroy(ddddddddddddddddddddddddspark_metal);
             }
 
+            else if(box !=null){
+                spark_wood.transform.position = hit.point;
+                spark_wood.transform.rotation = Quaternion.LookRotation(hit.normal);
+                sparksWood.Play();
+            }
+
             else {
                 clonem = Instantiate(spark_metal, hit.point, Quaternion.LookRotation(hit.normal)); 
                 clonem.tag= "trashm";
@@ -140,7 +157,6 @@ public class Shooting: MonoBehaviour
         fireready = false;
         _animator.SetBool("Reloading",true);
         reloadalert.text = "";
-        
     }
 
     public void CancelAnimation(){
