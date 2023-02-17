@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class DotSpawn : MonoBehaviour
 {
-
+    public Sens sens;
     public GameObject dot;
     Vector3 myVector;
 

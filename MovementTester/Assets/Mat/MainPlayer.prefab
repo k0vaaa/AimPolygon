@@ -681,6 +681,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b74615ddde295684db12c34aca26fb96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sens: {fileID: 11400000, guid: 975bbce281e41e74aaef488f6be9d480, type: 2}
   sensX: 40
   sensY: 40
   orientation: {fileID: 3630475490263782778}
@@ -6372,6 +6373,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f40dd093212dbbc468006352237e8a30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sparksWood: {fileID: 0}
+  spark_wood: {fileID: 0}
   SparksMetal: {fileID: 0}
   spark_metal: {fileID: 0}
   lifeTimeMetal: 5
@@ -6580,6 +6583,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f40dd093212dbbc468006352237e8a30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sparksWood: {fileID: 0}
+  spark_wood: {fileID: 0}
   SparksMetal: {fileID: 0}
   spark_metal: {fileID: 0}
   lifeTimeMetal: 5

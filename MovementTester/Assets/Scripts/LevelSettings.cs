@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelSettings : MonoBehaviour
 {   
+    Sens sens;
     private KeyCode menu = KeyCode.Escape;
     private KeyCode reloadScene = KeyCode.BackQuote;
     public GameObject enemy;
@@ -18,6 +19,8 @@ public class LevelSettings : MonoBehaviour
         }
         if(Input.GetKey(menu)){ 
             SceneManager.LoadScene(0);
+            Debug.Log(sens.x);
+            Debug.Log(sens.y);
         }
         
         if (GameObject.Find("EnemyBody(Clone)") == null)
